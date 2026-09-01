@@ -22,13 +22,13 @@ def reset_game():
 # 📌 ฟังก์ชัน MessageBox (Dialog)
 # ----------------------------------------------------
 @st.dialog("📊 สรุปผลการเล่นเกม")
-def show_result_dialog(ans1, ans2):
+def show_result_dialog(ans1, ans2, ans3):
     st.balloons()
     score = 0
 
     u_ans1 = ans1.strip().lower()
     u_ans2 = ans2.strip().lower()
-
+    u_ans2 = ans3.strip().lower()
     # ตรวจข้อ 1
     if u_ans1 == "apple":
         st.success("✅ ข้อ 1: ถูกต้อง")
