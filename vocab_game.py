@@ -101,7 +101,7 @@ ans3 = st.text_input(
     "ข้อ 3: He use  `p _ n`. 🖊️",
     value=st.session_state.ans3_val,
 )
-ans3 = st.text_input(
+ans4 = st.text_input(
     "ข้อ 3: He use  `k _ y` open the door. 🔑", 
     value=st.session_state.ans4_val,
 # อัปเดตค่าล่าสุดเข้าตัวแปร
