@@ -88,7 +88,7 @@ ans2 = st.text_input(
     value=st.session_state.ans2_val,
 )
 ans3 = st.text_input(
-    "ข้อ 2: He use  `P _ n`. 🖊️",
+    "ข้อ 3: He use  `P _ n`. 🖊️",
     value=st.session_state.ans2_val,
 )
 # อัปเดตค่าล่าสุดเข้าตัวแปร
