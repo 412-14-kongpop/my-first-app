@@ -1,9 +1,8 @@
-import time
 import streamlit as st
 
 st.set_page_config(page_title="PROVINCE_GAME", page_icon="🗺️")
 
-st.title("⏱️ PROVINCE_GAME (จังหวัดไยหยวอออ)")
+st.title("PROVINCE_GAME (จังหวัดไยหยวอออ)")
 
 # ----------------------------------------------------
 # 1. ข้อมูลโจทย์และคำตอบทั้ง 8 ข้อ (ข้อละ 5 คะแนน)
@@ -34,7 +33,6 @@ for i in range(1, 9):
 def reset_game():
     for i in range(1, 9):
         st.session_state[f"ans{i}_val"] = ""  # เคลียร์ค่าช่องป้อนคำตอบ
-    st.session_state.start = time.time()  # เริ่มจับเวลาใหม่
     st.session_state.is_ended = False  # ปิดหน้าต่างสรุปผล
 
 
@@ -84,60 +82,36 @@ def show_result_dialog(user_answers):
 
 
 # ----------------------------------------------------
-# 4. ปุ่มเริ่มเล่นเกม
+# 4. ปุ่มเริ่มเล่นใหม่ / รีเซ็ตคำตอบ
 # ----------------------------------------------------
-st.button("🎮 เริ่มเล่นเกม / รีเซ็ต", on_click=reset_game)
-
-# ----------------------------------------------------
-# 5. แถบแสดงเวลานับถอยหลัง (5 นาที = 300 วินาที)
-# ----------------------------------------------------
-GAME_TIME_LIMIT = 5 * 60
-
-if "start" in st.session_state and not st.session_state.get("is_ended", False):
-    elapsed_time = time.time() - st.session_state.start
-    time_left = int(GAME_TIME_LIMIT - elapsed_time)
-
-    if time_left > 0:
-        minutes = time_left // 60
-        seconds = time_left % 60
-        st.error(f"⏳ เหลือเวลา: {minutes:02d}:{seconds:02d} นาที")
-    else:
-        st.session_state.is_ended = True
-        st.rerun()
+st.button("🎮 เริ่มใหม่ / เคลียร์คำตอบ", on_click=reset_game)
 
 st.divider()
 
 # ----------------------------------------------------
-# 6. แสดงช่องรับคำตอบข้อ 1 - 8
+# 5. แสดงช่องรับคำตอบข้อ 1 - 8
 # ----------------------------------------------------
+st.subheader("🧩 ทายชื่อจังหวัดจากคำใบ้ต่อไปนี้ (ข้อละ 5 คะแนน เต็ม 40 คะแนน)")
+
 user_answers = []
-
-if "start" in st.session_state:
-    st.subheader("🧩 ทายชื่อจังหวัดจากคำใบ้ต่อไปนี้ (ข้อละ 5 คะแนน เต็ม 40 คะแนน)")
-
-    for q in QUESTIONS:
-        i = q["num"]
-        val = st.text_input(
-            f"ข้อ {i}: {q['clue']}",
-            value=st.session_state[f"ans{i}_val"],
-            key=f"input_{i}",
-        )
-        st.session_state[f"ans{i}_val"] = val
-        user_answers.append(val)
+for q in QUESTIONS:
+    i = q["num"]
+    val = st.text_input(
+        f"ข้อ {i}: {q['clue']}",
+        value=st.session_state[f"ans{i}_val"],
+        key=f"input_{i}",
+    )
+    st.session_state[f"ans{i}_val"] = val
+    user_answers.append(val)
 
 # ----------------------------------------------------
-# 7. ปุ่มส่งคำตอบและการทำงานสลับรอบ (Timer Loop)
+# 6. ปุ่มส่งคำตอบ
 # ----------------------------------------------------
-if "start" in st.session_state and not st.session_state.get("is_ended", False):
-    if st.button("📥 ส่งคำตอบ"):
-        st.session_state.is_ended = True
-        st.rerun()
-
-    time.sleep(1)
-    st.rerun()
+if st.button("📥 ส่งคำตอบ"):
+    st.session_state.is_ended = True
 
 # ----------------------------------------------------
-# 8. แสดง Dialog สรุปผล
+# 7. แสดง Dialog สรุปผล
 # ----------------------------------------------------
 if st.session_state.get("is_ended", False):
     show_result_dialog(user_answers)
