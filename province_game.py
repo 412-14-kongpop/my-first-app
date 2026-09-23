@@ -2,7 +2,9 @@ import streamlit as st
 
 st.set_page_config(page_title="PROVINCE_GAME", page_icon="🗺️")
 
-st.title("PROVINCE_GAME  (           จังหวัดไยหยอออ)")
+# 📌 ปรับหัวข้อให้ขึ้นบรรทัดใหม่
+st.title("PROVINCE_GAME")
+st.subheader("จังหวัดไยหยวอออ")
 
 # ----------------------------------------------------
 # 1. ข้อมูลโจทย์และคำตอบทั้ง 8 ข้อ (ข้อละ 5 คะแนน)
@@ -117,4 +119,4 @@ if st.session_state.get("is_ended", False):
     show_result_dialog(user_answers)
 
 st.divider()
-st.write("กลุ่ม 6")
+st.write("นายก้องภพ มีมาก เลขที่ 14 ม.4/12")
