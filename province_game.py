@@ -2,7 +2,7 @@ import streamlit as st
 
 st.set_page_config(page_title="PROVINCE_GAME", page_icon="🗺️")
 
-st.title("PROVINCE_GAME (จังหวัดไยหยวอออ)")
+st.title("PROVINCE_GAME         (จังหวัดไยหยอออ)")
 
 # ----------------------------------------------------
 # 1. ข้อมูลโจทย์และคำตอบทั้ง 8 ข้อ (ข้อละ 5 คะแนน)
